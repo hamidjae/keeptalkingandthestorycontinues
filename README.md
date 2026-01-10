@@ -42,7 +42,7 @@ I am going to use the required technologies in the following ways.
 - **React** - This is the frontend. Handles logic for Login, submitting an entry, the timer buzzing down, appending onto the string so that the story is updated in real-time
 - **Service** - The backend for React. It will handle the actual login and entry submission so that the frontend and the backend both work together.
 - **DB/Login** - This will store the player signups and logins, the longest games played as well as who played in them. This website cannot be used without this database authenticating the user's credentials
-- **WebSocket** - Updates the current story so far in real-time.
+- **WebSocket** - Updates the current story so far in real-time. Also updates who the current player is during each timer countdown.
 
 ## 🚀 AWS deliverable
 
