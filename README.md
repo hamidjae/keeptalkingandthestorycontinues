@@ -25,8 +25,8 @@ Have you ever wondered who the most quick-witted person is in your friend group?
 ### Key features
 
 - Secure login over HTTPS.
-- The capability to play with 6 other unique players.
-- Once the game concludes, an option to press a "Narrate!" button which will play Text-to-Speech for the end user.
+- The capability to play with 5 other unique players.
+- Once the game concludes, an option to press a "Narrate!" button which will play Text-to-Speech for the end user using ElevenLabs.
 - Games are persistently stored.
 - A leaderboard to show the longest game, and who played in it.
 - The prompts written by players displayed in real-time.
