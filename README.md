@@ -8,11 +8,11 @@ This web application is an adaptation of the popular elementary game of "Once up
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] Proper use of Markdown
-- [X] A concise and compelling elevator pitch
-- [X] Description of key features
-- [X] Description of how you will use each technology
-- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] Proper use of Markdown - Cloned the repository from Simon, understood how it worked, and implemented it
+- [X] A concise and compelling elevator pitch - Added some informal humor into the pitch, made it not too long, and used a call to action for the pitch to sound great.
+- [X] Description of key features - Extracted the key features of my web application from the images and the pitch, and added them in.
+- [X] Description of how you will use each technology - Read up on what the technologies do to the best of my current ability and linked features to technologies.
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references. - Created a folder for images, and used Markdown image reference to put it inside my startup deliverable.
 
 ### Elevator pitch
 
