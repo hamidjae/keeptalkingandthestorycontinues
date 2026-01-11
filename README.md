@@ -21,7 +21,7 @@ Have you ever wondered who the most quick-witted person is in your friend group?
 ### Design
 
 ![Design image](images/startupimage1.jpg)
-![Design image](b)
+![Design image](images/startupimage2.jpg)
 
 ### Key features
 
