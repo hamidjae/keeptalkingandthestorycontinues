@@ -15,6 +15,7 @@ The domain name correctly handles subdomains.
 ## AWS
 
 My IP address is: 100.50.162.166
+
 Faced no problems establishing this part of the deliverable. However, I need to remember that I use Git Bash in order to ssh, etc.
 
 ## Caddy
