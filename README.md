@@ -55,13 +55,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] **HTML pages** - Four HTML pages, starting from index.html that has links to all other pages on all pages.
-- [X] **Proper HTML element usage** - I used div elements with ids to differentiate one div from another, as well as spans. These IDs will be useful for CSS styling. Everything is also uses other semantic elements, like nav for navigation bar, section for different sections, footer, etc.
+- [X] **Proper HTML element usage** - I used div elements with ids to differentiate one div from another, as well as spans. These IDs will be useful for CSS styling. Everything also uses other semantic elements, like nav for navigation bar, section for different sections, footer, etc.
 - [X] **Links** - Properly used hrefs to link one part of the website to another. The login page will link to the game.html page.
-- [X] **Text** - Everything in every page has proper textual context. The "story so far" tab has the actual story that users have inputted so far, to name one.
+- [X] **Text** - Everything in every page has proper textual context. The "story so far" tab has the actual story that users have inputted so far, to name one. Text boxes have placeholder text to help guide users along, if they have no idea what they need to do. Buttons also have text attached to them that tell you what they do.
 - [X] **3rd party API placeholder** - The Narrate! button is the placeholder that will call in a third-party API for Text-to-Speech. It has a proper id to separate itself for this purpose.
 - [X] **Images** - Added an image at about.html that suits the page's themes, altered the size, and added an alt for accessibility purposes. It also has its own unique id for CSS styling.
-- [X] **Login placeholder** - Added a placeholder login/register with placeholder text. Implemented a "Remember Me" check that uses cookies, but will have to research on how this actually works
-- [X] **DB data placeholder** - The leaderboard.html will store the data of the top 3 games that were played, ranking which games were played the longest.
+- [X] **Login placeholder** - Added a placeholder login/register with placeholder text. Implemented a "Remember Me" check that uses cookies, but will have to research on how this actually works. For now though, this placeholder will be sufficient.
+- [X] **DB data placeholder** - The leaderboard.html will store the data of the top games that were played, ranking which games were played the longest from highest to lowest.
 - [X] **WebSocket placeholder** - The real-time implementation of the story so far when users take their turns in game.html represent the WebSocket part of this deliverable. As users type their additions to the story, the story so far section will update in real time.
 
 ## 🚀 CSS deliverable
