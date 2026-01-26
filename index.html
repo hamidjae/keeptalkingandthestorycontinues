@@ -29,7 +29,7 @@
             <form method="get" action="game.html">
         <div>
           <span>Username</span>
-          <input type="text" placeholder="e.g. supercoolplayer47" />
+          <input type="text" placeholder="e.g. supercoolplayer" />
         </div>
         <div>
           <span>Password</span>
@@ -37,8 +37,10 @@
         </div>
     <!-- Experimental feature: using cookies to save past data -->
         <div>
-            <label for="checkbox1">Remember Username</label> <input type="checkbox" name="varCheckbox" value="checkbox1"/>
+            <input type="checkbox" id="checkbox1" name="varCheckbox" value="checkbox1"/>
+            <label for="checkbox1">Remember Username</label>
         </div>
+        
         <button type="submit">Login</button>
         <button type="submit">Register</button>
       </form>
