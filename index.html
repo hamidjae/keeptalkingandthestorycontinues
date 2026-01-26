@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Keep Talking and the Story Continues!</title>
 </head>
 <body>
-    
+<!-- Main header portion here -->
+    <header>
+        <h1>Keep Talking.. and the Story Continues!</h1>
+
+        <!-- This is the navigation bar. Should be consistent across all sites. -->
+        <nav>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="game.html">Play Game!</a></li>
+                <li><a href="leaderboard.html">Leaderboards</a></li>
+                <li><a href="about.html">About</a></li>
+            </menu>
+        </nav>
+
+        <hr>
+    </header>
+
+    <!-- This is the main menu. Handles account registration and login. -->
+    <main>
+        <h1>Ready to get your game on?</h1>
+            <form method="get" action="game.html">
+        <div>
+          <span>Username</span>
+          <input type="text" placeholder="e.g. supercoolplayer47" />
+        </div>
+        <div>
+          <span>Password</span>
+          <input type="password" placeholder="e.g 1234" />
+        </div>
+    <!-- Experimental feature: using cookies to save past data -->
+        <div>
+            <label for="checkbox1">Remember Username</label> <input type="checkbox" name="varCheckbox" value="checkbox1"/>
+        </div>
+        <button type="submit">Login</button>
+        <button type="submit">Register</button>
+      </form>
+
+    <hr>
+    </main>
+
+    <!-- This is the footer. Contains creator information. -->
+    <footer>
+      <span class="text-reset">Created by Hamid Jaeyoung Jahangir</span>
+      <br />
+      <a href="https://github.com/hamidjae/keeptalkingandthestorycontinues">GitHub</a>
+    </footer>
 </body>
 </html>
