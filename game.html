@@ -27,17 +27,52 @@
     <!-- This is the players section. -->
         <section class="players-section">
             <h1>Players</h1>
-            <!-- The primary player here -->
+        <!-- The primary player here -->    
+
             <div class="player-self">
             SuperCoolKid! <span class="thisuser">- This is you!</span>
             </div>
-            <!-- Other players here -->
+
+        <!-- Other players here -->
             <div class="player">CoolerKid</div>
             <div class="player">AnotherKid</div>
         </section>
         
         <section class="game-area">
-            
+            <h1>Once upon a time...</h1>
+        
+        <section class="rounds">
+            <h2>Round 4</h2>
+        </section>
+    
+        <!-- An example of the story unfolding. People will take their turns and write in this story section. -->
+        <div class="story-feed" id="story-feed">
+        <div class="story-message my-player">
+        <span class="player-name">SuperCoolKid!</span>: there was a
+        </div>
+        
+        <div class="story-message other-player">
+        <span class="player-name">CoolerKid</span>: big, giant, fearsome
+        </div>
+        
+        <div class="story-message other-player">
+        <span class="player-name">AnotherKid</span>: dragon upon us!
+        </div>
+        </div>
+        <!-- Needs to have a scroll bar, since I don't want to elongate the entire page -->
+
+        <br>
+        <div class="whose-turn">
+            Your turn, <span class="player-name">SuperCoolKid!</span>!
+            <span class="timer" id="turn-timer">30s left</span>
+        </div>
+
+        <!-- Message input here -->
+        <div class="message-box">
+        <textarea id="user-message" placeholder="Write in your part of the story!"></textarea>
+        <button id="send-message">Send</button>
+        </div>
+
         </section>
     </main>
 </body>
