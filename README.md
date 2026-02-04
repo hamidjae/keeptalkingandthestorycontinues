@@ -68,12 +68,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [ ] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [ ] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [X] **Visually appealing colors and layout. No overflowing elements.** - I referenced Simon CSS as well as the official Bootstrap documentation for the different class types I could use to make my webpage. A key highlight is the Game page, where I used several cards to create sections of the webpage. I extensively looked at the Bootstrap documentation as well as Stack Overflow whenever I ran into issues. I implemented a custom color that was a bit lighter on the eyes for the Body section, since the bg-warning was too strong on the eyes.
+- [X] **Use of a CSS framework** - Extensively used Bootstrap for this assignment. I implemented several cards, as mentioned, as well as using the Navbar from Bootstrap. I also referenced Simon CSS for different areas I could use Bootstrap, and used both it and official documentation to see where I can put it. The Game page extensively uses cards. My Image also uses CSS frameworks. I also used several Bootstrap keywords, like text-dark and bg-dark to apply colors to inlines and blocks.
+- [X] **All visual elements styled using CSS** - Explained in the above, but almost everything from HTML was overhauled using CSS. The entirety of my startup now looks presentable, with different colors and custom sections that are only easily done through CSS.
+- [X] **Responsive to window resizing using flexbox and/or grid display** - I extensively used Flexbox in every single page to hide the nav and the footer when the page became too small. All body elements also automatically resize, including pictures (I had to actually really look into why my image was constantly zooming in and out when I was resizing it.) This easily was the most confusing to me, and I believe it was accomplished.
+- [X] **Use of a imported font** - I imported Roboto and Google Sans from Google Fonts. Roboto was used for Header and Footer, Google Fonts was used for Body.
+- [X] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I used all selectors: element, class, ID, pseudo selectors. An example of an element I used was the body element. An example of class was .navbar-brand. An example of ID was #picture img. An example of a pseudo selector was :hover. All of these selectors was used in my assignment to the full.
 
 ## 🚀 React part 1: Routing deliverable
 
