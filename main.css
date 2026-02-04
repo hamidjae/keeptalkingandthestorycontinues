@@ -2,6 +2,11 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 375px;
+  font-family: 'Google Sans', sans-serif;
+}
+
+nav, nav *, footer, footer *{
+    font-family: 'Barlow', sans-serif;
 }
 
 header {

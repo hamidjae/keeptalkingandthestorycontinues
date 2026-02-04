@@ -7,6 +7,10 @@
     <title>About</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="about.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body class="bg-dark text-light">
       <header class="container-fluid">
@@ -16,13 +20,14 @@
             <menu class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="game.html">Play Game!</a></li>
-                <li class="nav-item"><a class="nav-link active" href="leaderboard.html">Leaderboards</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboards</a></li>
+                <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
             </menu>
         </nav>
     </header>
-    <main>
-      <div id="picture" class="picture-boxes"><img width="350px" src="images/writing.jpg" alt="Image of a pen resting on a blank notebook." /></div>
+    <main class="container-fluid text-center">
+      <div>
+      <div id="picture" class="picture-boxes"><img src="images/writing.jpg" alt="Image of a pen resting on a blank notebook." /></div>
 
       <p>
         Keep Talking and the Story Continues is a game where you and two other players attempt to complete a narrative, three words at a time, until everyone but one runs out of time.
@@ -32,17 +37,20 @@
         Any likeness to existing intellectual properties is purely inspirational, and this website has been designed as a non-profit. The purpose of this website is for personal use, and any derivative uses reflects this.
       </p>
 
-      <div id="inspirational-quote">
+      <div id="inspirational-quote" class="quote-box bg-light text-dark">
         <div>You start coding, and I'll go figure out what the customer wants.</div>
         <div id="quote-author">- Someone in application development, probably.</div>
+      </div>
       </div>
     </main>
 
     <!-- This is the footer. Contains creator information. -->
-    <footer>
-      <span class="text-reset">Created by Hamid Jaeyoung Jahangir</span>
-      <br />
-      <a href="https://github.com/hamidjae/keeptalkingandthestorycontinues">GitHub</a>
+    <footer class="bg-dark text-white-50">
+      <div class="container-fluid">
+        <span class="text-reset">Created by Hamid Jaeyoung Jahangir</span>
+        <a class="text-reset" href="https://github.com/hamidjae/keeptalkingandthestorycontinues">Github</a>
+      </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
