@@ -21,3 +21,16 @@ footer{
     flex: 0 0 50px;
     background: hsl(180, 10%, 10%);
 }
+
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+  main {
+    flex: 1;
+    height: 100vh;
+  }
+}
