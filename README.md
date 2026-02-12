@@ -79,9 +79,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** - My code has successfully transitioned from HTML to being bundled by Vite, which has provided me modularity and a more proper hierarchy than the absolute mess of files I had before. Before this deliverable, all of my files were just haphazardly thrown together.
+- [X] **Components** - All components (login, leaderboard, game, about) are accounted for, bundled using Vite and routed with ReactRouter. Everything is as it appears before, except now everything is being handled by the router. The header and footer are constants, while only the main body actually changes as you navigate tabs.
+- [X] **Router** - All components use ReactRouter to navigate instead of the html format I was previously using. This router is quite amazing, and I actually am quite excited to use this in the future as well.
 
 ## 🚀 React part 2: Reactivity deliverable
 

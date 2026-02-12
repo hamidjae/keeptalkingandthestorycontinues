@@ -65,7 +65,11 @@ Resizing an image with Flexbox was a bit more complicated. I managed to get it w
 
 ## React Part 1: Routing
 
-Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
+This step was quite straightforward. I did not have to change any of my CSS thankfully (since I know some students had issues since React basically takes in every single CSS file.) However, I did have to change parts of my code, notably where I established style inside of an html instead of css, to make it compatible with .jsx
+Alongside this, some elements needed to be self-closing, such as <br> and <input>
+I must remember to do that in the future as well. 
+Other than that, this was an incredibly straightforward deliverable and I wish I did it sooner to stock up on some more grace days.
+I am running into some trouble with the Simon deliverable, so I'll have to visit the TAs about it.
 
 ## React Part 2: Reactivity
 
