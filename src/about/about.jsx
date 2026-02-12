@@ -6,7 +6,7 @@ export function About() {
     <main className="container-fluid text-center">
       <div>
         <div id="picture" className="picture-boxes">
-          <img src="/public/writing.jpg" alt="Image of a pen resting on a blank notebook." />
+          <img src="/writing.jpg" alt="Image of a pen resting on a blank notebook." />
         </div>
 
         <p>
