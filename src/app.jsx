@@ -24,10 +24,9 @@ export default function App() {
     const remembered = localStorage.getItem('userName');
     if (remembered) {
       setUserName(remembered);
-      setAuthState(AuthState.Authenticated);
-    } else {
-      setAuthState(AuthState.Unauthenticated);
-    }}, []);
+    }
+    setAuthState(AuthState.Unauthenticated);
+  },[]);
 
   return (
     <BrowserRouter>
