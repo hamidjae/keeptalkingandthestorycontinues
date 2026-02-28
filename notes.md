@@ -74,3 +74,5 @@ I am running into some trouble with the Simon deliverable, so I'll have to visit
 ## React Part 2: Reactivity
 
 Going through Simon, the JavaScript was quite easy to understand and implementing it did not seem like a big challenge. Most of it was similar to C++, and all that seems really necessary is to reference the documentation to see the way JavaScript types.
+
+Studied up on some more JavaScript essentials to try and figure out how to get my game working. The most interesting development was understanding the triple equals operator, which strictly evaluates instead of relying on type context clues.
