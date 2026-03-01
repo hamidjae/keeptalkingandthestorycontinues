@@ -1,17 +1,26 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './game.css';
 
+const DUMMY_PHRASES = [
+  'and suddenly...',
+  'I started dreaming',
+  'about a glorious round pizza',
+  'but with pineapples where pepperoni should be',
+  'yet that pizza was undoubtedly',
+  'still the most delicious one to me',
+];
+
 export function Game({ userName }) {
   const you = userName || 'SuperCoolKid!';
 
-  const [players] = useState([
-    { name: you, role: 'you', status: 'waiting' },
-    { name: 'CoolerKid', role: 'opponent', status: 'typing' },
-    { name: 'AnotherKid', role: 'opponent', status: 'waiting' },
-    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-  ]);
+const [players, setPlayers] = useState([
+  { name: you, role: 'you', status: 'waiting' },
+  { name: 'CoolerKid', role: 'opponent', status: 'waiting' },
+  { name: 'AnotherKid', role: 'opponent', status: 'waiting' },
+  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+]);
 
   const turnOrder = useMemo(() => players.map((p) => p.name), [players]);
 
@@ -25,6 +34,7 @@ export function Game({ userName }) {
     { from: 'AnotherKid', text: 'dragon upon us!' },
   ]);
 
+  const [remainingPhrases, setRemainingPhrases] = useState(DUMMY_PHRASES);
   const feedRef = useRef(null);
 
   useEffect(() => {
@@ -34,6 +44,41 @@ export function Game({ userName }) {
 
   const currentTurn = turnOrder[turnIndex] || 'NO PLAYER';
   const isYourTurn = currentTurn === you;
+  
+  const typingBadge = <span className="badge bg-warning text-dark">Typing</span>;
+  const waitingBadge = <span className="badge bg-secondary">Waiting</span>;
+
+  useEffect(() => {
+  setPlayers((prev) =>
+    prev.map((p) => {
+      if (p.status === 'disconnected' || p.name === 'NO PLAYER') return p;
+      return { ...p, status: p.name === currentTurn ? 'typing' : 'waiting' };
+    })
+  );
+}, [currentTurn]);
+
+  useEffect(() => {
+  if (isYourTurn) return;
+  if (currentTurn === 'NO PLAYER') return;
+
+  const timeout = setTimeout(() => {
+    setRemainingPhrases((prev) => {
+      let pool = prev.length ? prev : DUMMY_PHRASES;
+
+      const index = Math.floor(Math.random() * pool.length);
+      const phrase = pool[index];
+
+      const newPool = pool.filter((_, i) => i !== index);
+
+      setMessages((m) => [...m, { from: currentTurn, text: phrase }]);
+      advanceTurn();
+
+      return newPool;
+    });
+  }, 2000);
+
+  return () => clearTimeout(timeout);
+}, [currentTurn, isYourTurn, turnOrder]);
 
   function isEmptySlot(name) {
     return name === 'NO PLAYER';
@@ -92,17 +137,17 @@ export function Game({ userName }) {
               <section className="mb-3 flex-grow-0">
                 <section className="player card mb-2 bg-dark text-light p-2">
                   <span className="badge bg-success">You</span> {you}
-                  <span className="badge bg-secondary">Waiting</span>
+                  {players[0]?.status === 'typing' ? typingBadge : waitingBadge}
                 </section>
 
                 <section className="player card mb-2 bg-dark text-light p-2 d-flex justify-content-between align-items-center">
                   <span className="badge bg-danger">Opponent</span> CoolerKid{' '}
-                  <span className="badge bg-warning text-dark">Typing</span>
+                  {players[1]?.status === 'typing' ? typingBadge : waitingBadge}
                 </section>
 
                 <section className="player card mb-2 bg-dark text-light p-2 d-flex justify-content-between align-items-center">
                   <span className="badge bg-danger">Opponent</span> AnotherKid{' '}
-                  <span className="badge bg-secondary">Waiting</span>
+                  {players[2]?.status === 'typing' ? typingBadge : waitingBadge}
                 </section>
 
                 <section className="player card mb-2 bg-dark text-light p-2 text-muted">
