@@ -37,6 +37,23 @@ export function Game({ userName, onGameEnd }) {
   const feedRef = useRef(null);
   const hasReportedRef = useRef(false);
 
+  // This is for the future, when I actually call in my third party API
+  async function mockNarrateAPI(storyText) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const max = 200;
+      let snippet = storyText.length > max ? storyText.slice(-max) : storyText;
+      if (storyText.length > max) {
+        const firstSpace = snippet.indexOf(' ');
+        if (firstSpace !== -1) snippet = snippet.slice(firstSpace + 1);
+        snippet = '…' + snippet;
+      }
+
+      resolve(`The narrator narrates: "${snippet}"`);
+    }, 1000);
+  });
+}
+
   // Pushing stuff to leaderboard
   useEffect(() => {
   if (!gameOver) return;
@@ -183,6 +200,19 @@ useEffect(() => {
     }
   }
 
+  // This is also for the future when I need to mock in the third party API
+  async function handleNarrate() {
+  if (messages.length === 0) return;
+
+  const fullStory = messages.map((m) => m.text).join(' ');
+  const narration = await mockNarrateAPI(fullStory);
+
+  setMessages((prev) => [
+    ...prev,
+    { from: 'Narrator', text: narration }
+  ]);
+}
+
   return (
     <main className="container-fluid">
       <div className="row g-4">
@@ -281,7 +311,7 @@ useEffect(() => {
             )}
               </section>
 
-              <button id="third-party-button" className="btn btn-primary mb-3" type="button">
+              <button id="third-party-button" className="btn btn-primary mb-3" type="button" onClick={handleNarrate}>
                 Narrate!
               </button>
 

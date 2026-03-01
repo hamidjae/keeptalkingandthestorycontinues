@@ -87,8 +87,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - All functionality has been implemented, with proper turn rotations, round turns, and game over state. LocalStorage ensures that games are saved to the leaderboard. The login screen also properly handles login and register, and the "Remember Username" checkbar properly persists. The third-party API call is to my Narrate button, which has everything mocked out except calling the actual API.
+- [X] **Hooks** - Multiple hooks were used, such as UseState for managing the game's state, such as rounds, players, leaderboard entries. UseEffect was used for the timer countdown, game over detection, syncing LocalStorage to leaderboard, and loading that data when needed. I also used useMemo in order to calculate the turn order, and useRef was also used to ensure that the scroll bar properly works.
 
 ## 🚀 Service deliverable
 

@@ -76,3 +76,5 @@ I am running into some trouble with the Simon deliverable, so I'll have to visit
 Going through Simon, the JavaScript was quite easy to understand and implementing it did not seem like a big challenge. Most of it was similar to C++, and all that seems really necessary is to reference the documentation to see the way JavaScript types.
 
 Studied up on some more JavaScript essentials to try and figure out how to get my game working. The most interesting development was understanding the triple equals operator, which strictly evaluates instead of relying on type context clues.
+
+Handling React was tougher than I initially thought. I had to look at the Simon deliverable and several online forums in order to find out just exactly what I was doing, but now I feel way more comfortable in using the different hooks. The most interesting hook to me was definitely useState, because it let me properly manage my application so that the other hooks can follow through easily.
