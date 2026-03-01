@@ -10,7 +10,7 @@ const DUMMY_PHRASES = [
   'still the most delicious one to me',
 ];
 
-export function Game({ userName }) {
+export function Game({ userName, onGameEnd }) {
   const you = userName || 'SuperCoolKid!';
 
   const [players, setPlayers] = useState([
@@ -35,6 +35,33 @@ export function Game({ userName }) {
 
   const [remainingPhrases, setRemainingPhrases] = useState(DUMMY_PHRASES);
   const feedRef = useRef(null);
+  const hasReportedRef = useRef(false);
+
+  // Pushing stuff to leaderboard
+  useEffect(() => {
+  if (!gameOver) return;
+  if (hasReportedRef.current) return;
+  hasReportedRef.current = true;
+
+  const activePlayers = players
+    .filter((p) => p.name !== 'NO PLAYER' && p.status !== 'disconnected')
+    .map((p) => p.name);
+
+  const date = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const roundsPlayed = Math.max(round - 1, 0);
+
+  if (typeof onGameEnd === 'function') {
+    onGameEnd({
+      players: activePlayers,
+      rounds: roundsPlayed,
+      date,
+    });
+  }
+}, [gameOver, players, round, onGameEnd]);
 
   useEffect(() => {
     if (!feedRef.current) return;

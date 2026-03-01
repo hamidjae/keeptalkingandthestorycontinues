@@ -19,6 +19,22 @@ function RequireAuth({ authState, children }) {
 export default function App() {
   const [authState, setAuthState] = useState(AuthState.Unknown);
   const [userName, setUserName] = useState('');
+  const [leaderboardEntries, setLeaderboardEntries] = useState(() => {
+    const saved = localStorage.getItem('leaderboardEntries');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+  localStorage.setItem('leaderboardEntries', JSON.stringify(leaderboardEntries));
+  }, [leaderboardEntries]);
+
+  function handleGameEnd({ players, rounds, date }) {
+    setLeaderboardEntries((prev) => {
+      const next = [...prev, { rank: 0, players, rounds, date }]
+        .sort((a, b) => b.rounds - a.rounds);
+      return next.map((e, idx) => ({ ...e, rank: idx + 1 }));
+    });
+  }
 
   useEffect(() => {
     const remembered = localStorage.getItem('userName');
@@ -51,8 +67,8 @@ export default function App() {
 
         <Routes>
           <Route path='/' element={<Login userName = {userName} authState = {authState} onAuthChange={(newUserName, newAuthState) => {setUserName(newUserName); setAuthState(newAuthState);}}/>} />
-          <Route path='/game' element={<RequireAuth authState={authState}><Game userName = {userName}/></RequireAuth>} />
-          <Route path='/leaderboard' element={<RequireAuth authState={authState}><Leaderboard userName = {userName}/></RequireAuth>} />
+          <Route path='/game' element={<RequireAuth authState={authState}><Game userName={userName} onGameEnd={handleGameEnd} /></RequireAuth>} />
+          <Route path='/leaderboard' element={<RequireAuth authState={authState}><Leaderboard userName={userName} entries={leaderboardEntries} /></RequireAuth>} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
