@@ -13,26 +13,25 @@ const DUMMY_PHRASES = [
 export function Game({ userName }) {
   const you = userName || 'SuperCoolKid!';
 
-const [players, setPlayers] = useState([
-  { name: you, role: 'you', status: 'waiting' },
-  { name: 'CoolerKid', role: 'opponent', status: 'waiting' },
-  { name: 'AnotherKid', role: 'opponent', status: 'waiting' },
-  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-  { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
-]);
+  const [players, setPlayers] = useState([
+    { name: you, role: 'you', status: 'waiting' },
+    { name: 'CoolerKid', role: 'opponent', status: 'waiting' },
+    { name: 'AnotherKid', role: 'opponent', status: 'waiting' },
+    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+    { name: 'NO PLAYER', role: 'opponent', status: 'disconnected' },
+  ]);
 
   const turnOrder = useMemo(() => players.map((p) => p.name), [players]);
 
   const [turnIndex, setTurnIndex] = useState(0);
-  const [round, setRound] = useState(4);
+  const [round, setRound] = useState(0);
+  const [turnTime, setTurnTime] = useState(30);
+  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [gameOver, setGameOver] = useState(false);
 
   const [draft, setDraft] = useState('');
-  const [messages, setMessages] = useState([
-    { from: you, text: 'there was a' },
-    { from: 'CoolerKid', text: 'big, giant, fearsome' },
-    { from: 'AnotherKid', text: 'dragon upon us!' },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const [remainingPhrases, setRemainingPhrases] = useState(DUMMY_PHRASES);
   const feedRef = useRef(null);
@@ -44,41 +43,63 @@ const [players, setPlayers] = useState([
 
   const currentTurn = turnOrder[turnIndex] || 'NO PLAYER';
   const isYourTurn = currentTurn === you;
-  
+
   const typingBadge = <span className="badge bg-warning text-dark">Typing</span>;
   const waitingBadge = <span className="badge bg-secondary">Waiting</span>;
 
   useEffect(() => {
-  setPlayers((prev) =>
-    prev.map((p) => {
-      if (p.status === 'disconnected' || p.name === 'NO PLAYER') return p;
-      return { ...p, status: p.name === currentTurn ? 'typing' : 'waiting' };
-    })
-  );
-}, [currentTurn]);
+    if (round === 0) return;
+    setSecondsLeft(turnTime);
+  }, [turnIndex, turnTime, round]);
+
+useEffect(() => {
+  if (gameOver) return;
+  if (round === 0) return;
+
+  if (secondsLeft <= 0) {
+    setGameOver(true);
+    return;
+  }
+
+  const t = setTimeout(() => {
+    setSecondsLeft((s) => s - 1);
+  }, 1000);
+
+  return () => clearTimeout(t);
+}, [secondsLeft, gameOver, round]);
 
   useEffect(() => {
-  if (isYourTurn) return;
-  if (currentTurn === 'NO PLAYER') return;
+    setPlayers((prev) =>
+      prev.map((p) => {
+        if (p.status === 'disconnected' || p.name === 'NO PLAYER') return p;
+        return { ...p, status: p.name === currentTurn ? 'typing' : 'waiting' };
+      })
+    );
+  }, [currentTurn]);
 
-  const timeout = setTimeout(() => {
-    setRemainingPhrases((prev) => {
-      let pool = prev.length ? prev : DUMMY_PHRASES;
+  useEffect(() => {
+    if (gameOver) return;
+    if (isYourTurn) return;
+    if (currentTurn === 'NO PLAYER') return;
 
-      const index = Math.floor(Math.random() * pool.length);
-      const phrase = pool[index];
+    const timeout = setTimeout(() => {
+      setRemainingPhrases((prev) => {
+        const pool = prev.length ? prev : DUMMY_PHRASES;
 
-      const newPool = pool.filter((_, i) => i !== index);
+        const index = Math.floor(Math.random() * pool.length);
+        const phrase = pool[index];
 
-      setMessages((m) => [...m, { from: currentTurn, text: phrase }]);
-      advanceTurn();
+        const newPool = pool.filter((_, i) => i !== index);
+        ensureRoundStarted();
+        setMessages((m) => [...m, { from: currentTurn, text: phrase }]);
+        advanceTurn();
 
-      return newPool;
-    });
-  }, 2000);
+        return newPool;
+      });
+    }, 2000);
 
-  return () => clearTimeout(timeout);
-}, [currentTurn, isYourTurn, turnOrder]);
+    return () => clearTimeout(timeout);
+  }, [currentTurn, isYourTurn, turnOrder, gameOver]);
 
   function isEmptySlot(name) {
     return name === 'NO PLAYER';
@@ -94,23 +115,35 @@ const [players, setPlayers] = useState([
         next = (next + 1) % max;
       }
 
-      if (next === 0) {
-        setRound((r) => r + 1);
-      }
+    if (turnOrder[next] === you) {
+        setRound((r) => {
+        if (r === 0) return 0;
+
+        const nextRound = r + 1;
+        setTurnTime((t) => Math.max(t - 5, 5));
+
+        return nextRound;
+    });
+    }
 
       return next;
     });
   }
 
+  function ensureRoundStarted() {
+  setRound((r) => (r === 0 ? 1 : r));
+  }
+
   function handleSend() {
     const trimmed = draft.trim();
+    if (gameOver) return;
     if (!trimmed) return;
 
     if (!isYourTurn) {
       alert("It's not your turn.");
       return;
     }
-
+    ensureRoundStarted();
     setMessages((prev) => [...prev, { from: you, text: trimmed }]);
     setDraft('');
     advanceTurn();
@@ -205,34 +238,47 @@ const [players, setPlayers] = useState([
                 ref={feedRef}
                 style={{ maxHeight: '300px', overflowY: 'auto' }}
               >
-                {messages.map((m, idx) => (
-                  <article
+                {messages.length === 0 ? (
+                    <div className="text-muted fst-italic">
+                        The story hasn't started yet...
+                    </div>
+                ) : (
+                messages.map((m, idx) => (
+                <article
                     key={idx}
                     className={`story-message ${m.from === you ? 'my-player' : 'other-player'} mb-2 p-2 bg-dark rounded`}
-                  >
+                >
                     <span className="player-name">{m.from}</span>: {m.text}
-                  </article>
-                ))}
+                </article>
+                ))
+            )}
               </section>
 
               <button id="third-party-button" className="btn btn-primary mb-3" type="button">
                 Narrate!
               </button>
 
-              <section className="whose-turn mb-3">
-                {isYourTurn ? (
-                  <>
-                    Your turn, <span className="player-name">{you}</span>!
-                  </>
-                ) : (
-                  <>
-                    Your turn, <span className="player-name">{currentTurn}</span>!
-                  </>
-                )}
-                <span className="timer" id="turn-timer">
-                </span>
-              </section>
-
+    <section className="whose-turn mb-3">
+    {gameOver ? (
+        <span className="text-danger fw-bold">GAME OVER</span>
+    ) : (
+        <>
+        {isYourTurn ? (
+            <>
+            Your turn, <span className="player-name"> {you}</span>!
+            </>
+        ) : (
+            <>
+            Your turn, <span className="player-name"> {currentTurn}</span>!
+            </>
+        )}
+        {" "}
+        <span className="timer" id="turn-timer">
+            {round === 0 ? 'Waiting to start...' : `${secondsLeft}s left`}
+        </span>
+        </>
+    )}
+    </section>
               <section className="message-box input-group">
                 <textarea
                   id="user-message"
@@ -241,14 +287,14 @@ const [players, setPlayers] = useState([
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   onKeyDown={onDraftKeyDown}
-                  disabled={!isYourTurn}
+                  disabled={!isYourTurn || gameOver}
                 ></textarea>
                 <button
                   id="send-message"
                   className="btn btn-success"
                   type="button"
                   onClick={handleSend}
-                  disabled={!isYourTurn}
+                  disabled={!isYourTurn || gameOver}
                 >
                   Send
                 </button>
