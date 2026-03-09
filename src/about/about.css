@@ -11,6 +11,14 @@
   align-items: center;
 }
 
+.about-background{
+  background-image:url(/layered-peaks-haikei.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  min-height: 20vh;
+}
+
 #picture img {
   width: 100%;
   height: auto;

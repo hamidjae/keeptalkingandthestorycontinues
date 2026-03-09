@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { AuthState } from '../authState.jsx';
+import './login.css';
 
 export function Login({userName, authState, onAuthChange}) {
   const [name, setName] = useState(userName ?? '');
@@ -111,9 +112,9 @@ if (authState === AuthState.Authenticated) {
 }
 
   return (
-    <main className="container-fluid text-center align-items-center">
+    <main className="container-fluid text-center align-items-center login-background login-image">
         <form onSubmit={handleLogin}>
-        <h1>Ready to get your game on?</h1>
+        <h1 className="title-text">Ready to get your game on?</h1>
         <div className="input-group mb-3">
           <span className="input-group-text">Username</span>
           <input className="form-control" type="text" placeholder="e.g. supercoolplayer" style={{maxWidth: '400px' }} value={name} onChange={(e) => setName(e.target.value)}/>
@@ -125,7 +126,7 @@ if (authState === AuthState.Authenticated) {
 
         <div className="form-check mb-3">
             <input className="form-check-input" type="checkbox" id="checkbox1" name="varCheckbox" value="checkbox1" checked={remember} onChange={(e) => setRemember(e.target.checked)}/>
-            <label className="form-check-label" htmlFor="checkbox1">Remember Username</label>
+            <label className="form-check-label title-text" htmlFor="checkbox1">Remember Username</label>
         </div>
         
         <button type="submit" className="btn btn-primary">Login</button>

@@ -2,8 +2,8 @@ import React from 'react';
 import './about.css';
 
 export function About() {
-  return (
-    <main className="container-fluid text-center">
+  return (  
+    <main className="about-background container-fluid text-center">
       <div>
         <div id="picture" className="picture-boxes">
           <img src="/writing.jpg" alt="Image of a pen resting on a blank notebook." />
