@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -83,6 +84,56 @@ apiRouter.get('/scores', verifyAuth, (_req, res) => {
 apiRouter.post('/score', verifyAuth, (req, res) => {
   scores = updateScores(req.body);
   res.send(scores);
+});
+
+apiRouter.get('/test', (_req, res) => {
+  res.send({ msg: 'Backend is running' });
+});
+
+apiRouter.post('/tts', async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    if (!text) {
+      return res.status(400).send({ msg: 'Text is required' });
+    }
+
+    const apiKey = process.env.ELEVENLABS_API_KEY;
+    const voiceId = process.env.ELEVENLABS_VOICE_ID;
+    console.log('VOICE ID USED:', process.env.ELEVENLABS_VOICE_ID);
+
+    if (!apiKey || !voiceId) {
+      return res.status(500).send({ msg: 'Missing ElevenLabs credentials' });
+    }
+
+    const response = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+      {
+        method: 'POST',
+        headers: {
+          'xi-api-key': apiKey,
+          'Content-Type': 'application/json',
+          Accept: 'audio/mpeg',
+        },
+        body: JSON.stringify({
+          text,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('ElevenLabs error:', response.status, errorText);
+      return res.status(response.status).send(errorText);
+    }
+
+    const audioBuffer = Buffer.from(await response.arrayBuffer());
+    res.set('Content-Type', 'audio/mpeg');
+    res.send(audioBuffer);
+  } catch (err) {
+    console.error('ERROR in /tts:', err);
+    res.status(500).send({ msg: 'TTS failed', error: err.message });
+  }
 });
 
 app.use((err, req, res, next) => {
