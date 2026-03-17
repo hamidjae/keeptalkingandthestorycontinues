@@ -9,7 +9,7 @@ const authCookieName = 'token';
 let users = [];
 let scores = [];
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cookieParser());
