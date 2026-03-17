@@ -94,12 +94,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - Inside service/index.js is my backend server created using Node.js and Express. It handles listening for server ports, parses JSONs, handles cookies, and also services API routes.
+- [X] **Static middleware for frontend** - I used express.static('public') in order to serve all of my frontend files, while returning my index.html in case the user somehow ends up on non-API routes.
+- [X] **Calls to third party endpoints** - My backend calls ElevenLabs' text-to-speech API inside of service/index.js, specifically the /api/tts endpoint which I got the framework of the code from through ElevenLabs. It generates audio using the unique API key and voice ID that I have stored in ecosystem.config.js by secure shelling into my website, because .env is automatically deleted every time I run the deploy script. Therefore, I used this practice since it was standard practice. The audio that is returned, is heard by the user upon pressing "Narrate!"
+- [X] **Backend service endpoints** - Multiple endpoint services are implemented, such as /api/auth/create and /api/auth/login for authentication, and /api/scores for handling scores. I also have a dummy /api/test in order to check if this backend service endpoint works (which it does!)
+- [X] **Frontend calls service endpoints** - My frontend calls /api/tts, which calls a backend endpoint. Other frontend files also call the authentication and application feature service endpoints, for instance.
+- [X] **Supports registration, login, logout, and restricted endpoint** - Registration, login, and logout routes were implemented. I also protected these endpoints through the verifyAuth middleware, therefore only allowing authenticated users to access restricted routes like /api/scores. BCrypt was also used to hash passwords, using bcrypt.hash() to hash passwords, and bcrypt.compare() when the user is attempting to log in.
 
 ## 🚀 DB deliverable
 
