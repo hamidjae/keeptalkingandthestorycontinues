@@ -78,3 +78,28 @@ Going through Simon, the JavaScript was quite easy to understand and implementin
 Studied up on some more JavaScript essentials to try and figure out how to get my game working. The most interesting development was understanding the triple equals operator, which strictly evaluates instead of relying on type context clues.
 
 Handling React was tougher than I initially thought. I had to look at the Simon deliverable and several online forums in order to find out just exactly what I was doing, but now I feel way more comfortable in using the different hooks. The most interesting hook to me was definitely useState, because it let me properly manage my application so that the other hooks can follow through easily.
+
+## Service
+
+It was a bit interesting to learn about the difference between URL, URN, and URI.
+From what I understood, Uniform Resource Identifiers (URI) can either mean URL or URN.
+Uniform Resource Name represents only the unique resource name, while Uniform Resource Location specifies the location.
+
+I'll also put down the ports mentioned on the learning material that was very interesting to me. I should come back to this in the future.
+20	File Transfer Protocol (FTP) for data transfer
+22	Secure Shell (SSH) for connecting to remote devices
+25	Simple Mail Transfer Protocol (SMTP) for sending email
+53	Domain Name System (DNS) for looking up IP addresses
+80	Hypertext Transfer Protocol (HTTP) for web requests
+110	Post Office Protocol (POP3) for retrieving email
+123	Network Time Protocol (NTP) for managing time
+161	Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers
+194	Internet Relay Chat (IRC) for chatting
+443	HTTP Secure (HTTPS) for secure web requests
+
+The Status Codes for HTTP is also very useful.
+1xx - Informational.
+2xx - Success.
+3xx - Redirect to some other location, or that the previously cached resource is still valid.
+4xx - Client errors. The request is invalid.
+5xx - Server errors. The request cannot be satisfied due to an error on the server.
