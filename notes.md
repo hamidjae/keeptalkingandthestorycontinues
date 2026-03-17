@@ -109,3 +109,5 @@ Integrating a third party API into my website was pretty interesting. I ran into
 Service also exposed me to using .env in order to put my API key and the voice ID from ElevenLabs in order to call it properly. I also had a security risk by committing my .env into GitHub, so I had to delete my API key and slot in a new one. It works perfectly otherwise though. Good security catch from me!
 
 Service was pretty fun. I was quite confused on a lot of things, but it gradually clicked in time, and I properly was able to fit in the third-party API that I wanted. Hurray!
+
+This part of the deliverable was incredibly fun. I would happily do it again!
