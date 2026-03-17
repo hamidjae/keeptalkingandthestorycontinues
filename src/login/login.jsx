@@ -112,7 +112,7 @@ if (authState === AuthState.Authenticated) {
 }
 
   return (
-    <main className="container-fluid text-center align-items-center login-background login-image">
+    <main className="container-fluid text-center align-items-center login-background">
         <form onSubmit={handleLogin}>
         <h1 className="title-text">Ready to get your game on?</h1>
         <div className="input-group mb-3">
