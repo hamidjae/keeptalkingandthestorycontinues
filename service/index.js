@@ -1,15 +1,13 @@
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 const cookieParser = require("cookie-parser");
+const DB = require('./database');
 const bcrypt = require("bcryptjs");
 const express = require("express");
 const uuid = require("uuid");
 const app = express();
 
 const authCookieName = "token";
-let users = [];
-let scores = [];
-
 const port = process.env.PORT || 4000;
 
 app.use(express.json());
@@ -52,13 +50,15 @@ apiRouter.get("/auth/me", async (req, res) => {
 apiRouter.post("/auth/login", async (req, res) => {
   try {
     const user = await findUser("email", req.body.email);
+
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
-      user.token = uuid.v4();
-      setAuthCookie(res, user.token);
+      const token = uuid.v4();
+      await DB.updateUserToken(user.email, token);
+      setAuthCookie(res, token);
       return res.send({ email: user.email });
     }
 
-    res.status(401).send({ msg: "Error. Please check password/username, and whether the account is already registered!" });
+    res.status(401).send({ msg: "Unauthorized" });
   } catch (err) {
     console.error("ERROR in /auth/login:", err);
     res.status(500).send({ msg: "Login failed", error: err.message });
@@ -184,20 +184,28 @@ function updateScores(newScore) {
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
-
   const user = {
     email,
     password: passwordHash,
     token: uuid.v4(),
   };
 
-  users.push(user);
+  await DB.createUser(user);
   return user;
 }
 
 async function findUser(field, value) {
   if (!value) return null;
-  return users.find((u) => u[field] === value);
+
+  if (field === 'email') {
+    return DB.getUser(value);
+  }
+
+  if (field === 'token') {
+    return DB.getUserByToken(value);
+  }
+
+  return null;
 }
 
 function setAuthCookie(res, authToken) {
