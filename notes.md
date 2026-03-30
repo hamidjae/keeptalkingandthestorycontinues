@@ -113,3 +113,7 @@ Service was pretty fun. I was quite confused on a lot of things, but it graduall
 This part of the deliverable was incredibly fun. I would happily do it again!
 
 Adding a random comment here since I committed something that you don't see...
+
+## Database
+
+Setting up the Simon application to work with MongoDB was insanely cool. It was quite straightforward when it came to it, and being able to see all of the credentials (with passwords properly hashed!) inside of MongoDB was quite amazing. I also noticed that every user has a unique token, which seems to me is a unique identifier since identifying users by username would be ambiguous if a user were to delete their account, and another user would create an account with the same username. Tokens remove that ambiguity. 
