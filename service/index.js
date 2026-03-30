@@ -67,10 +67,11 @@ apiRouter.post("/auth/login", async (req, res) => {
 
 apiRouter.delete("/auth/logout", async (req, res) => {
   try {
-    const user = await findUser("token", req.cookies[authCookieName]);
-    if (user) {
-      delete user.token;
+    const token = req.cookies[authCookieName];
+    if (token) {
+      await DB.clearUserToken(token);
     }
+
     res.clearCookie(authCookieName);
     res.status(204).end();
   } catch (err) {
@@ -93,12 +94,14 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
-apiRouter.get("/scores", verifyAuth, (_req, res) => {
+apiRouter.get("/scores", verifyAuth, async (_req, res) => {
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
-apiRouter.post("/score", verifyAuth, (req, res) => {
-  scores = updateScores(req.body);
+apiRouter.post("/score", verifyAuth, async (req, res) => {
+  await DB.addScore(req.body);
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
@@ -161,27 +164,6 @@ app.use((_req, res) => {
   res.sendFile("index.html", { root: "public" });
 });
 
-function updateScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
-
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
   const user = {
@@ -211,7 +193,7 @@ async function findUser(field, value) {
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     sameSite: "strict",
   });
