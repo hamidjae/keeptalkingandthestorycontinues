@@ -105,8 +105,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [X] **Stores data in MongoDB** - The relevant data stored in MongoDB are the scores. Instead of locally updating the score leaderboards when a game concludes, MongoDB automatically sends and retrieves scores into the cluster I have so that this information persists globally. I can verify that data is being stored in MongoDB because inside of my cluster, the "startup" tab contains "score", storing players in an array, the date as a string, and the score (rounds) as an integer.
+- [X] **Stores credentials in MongoDB** - Registration, login, and logout are all handled through MongoDB. I changed the apiRouters in my backend to reference MongoDB instead, allowing for information to be stored globally instead of locally. I can verify that credentials are properly stored because inside of my cluster, the "user" tab contains information of every single user that has ever registered. Names are stored in string, while passwords are properly hashed and stored in their hashed format to verify that I cannot view the passwords even if I tried. When a user registers, it is put into my cluster. When a user logs in, the website asks mongoDB for the relevant information to authenticate them.
 
 ## 🚀 WebSocket deliverable
 
