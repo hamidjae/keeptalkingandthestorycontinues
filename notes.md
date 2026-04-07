@@ -117,3 +117,7 @@ Adding a random comment here since I committed something that you don't see...
 ## Database
 
 Setting up the Simon application to work with MongoDB was insanely cool. It was quite straightforward when it came to it, and being able to see all of the credentials (with passwords properly hashed!) inside of MongoDB was quite amazing. I also noticed that every user has a unique token, which seems to me is a unique identifier since identifying users by username would be ambiguous if a user were to delete their account, and another user would create an account with the same username. Tokens remove that ambiguity. 
+
+## WebSocket
+
+WebSocket was pretty interesting to learn about. Instead of repeatedly opening and closing connections (which would put a lot of stress and is inefficient), it seems to only activate one connection, reducing any latency lag and making it much easier to work with. Simon's WebSocket is pretty minor all things considered, but it would make interactions way more seamless than if repeatedly making several connections.
