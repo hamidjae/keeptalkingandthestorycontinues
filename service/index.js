@@ -10,6 +10,9 @@ const app = express();
 const authCookieName = "token";
 const port = process.env.PORT || 4000;
 
+const http = require("http");
+const { WebSocketServer } = require("ws");
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static("public"));
@@ -199,6 +202,25 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server, path: "/ws" });
+
+wss.on("connection", (ws) => {
+  console.log("WebSocket connected");
+
+  ws.on("message", (message) => {
+    console.log("Received:", message.toString());
+
+    ws.send(JSON.stringify({ msg: "Server received your message" }));
+  });
+
+  ws.on("close", () => {
+    console.log("WebSocket disconnected");
+  });
+
+  ws.send(JSON.stringify({ msg: "Connected to WebSocket server" }));
+});
+
+server.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
