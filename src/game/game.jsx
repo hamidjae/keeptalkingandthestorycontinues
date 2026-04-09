@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./game.css";
+import { GameSocket } from "./gameSocket";
 
 const DUMMY_PHRASES = [
   "and suddenly...",
@@ -11,6 +12,26 @@ const DUMMY_PHRASES = [
 ];
 
 export function Game({ userName, onGameEnd }) {
+
+  useEffect(() => {
+  const socket = new GameSocket();
+
+  socket.onOpen(() => {
+    console.log("Frontend connected to WebSocket");
+    socket.send("hello", { text: "Hi from React" });
+  });
+
+  socket.onMessage((msg) => {
+    console.log("Frontend received:", msg);
+  });
+
+  socket.onClose(() => {
+    console.log("Frontend disconnected");
+  });
+
+  return () => socket.close();
+}, []);
+
   const you = userName || "SuperCoolKid!";
 
   const [players, setPlayers] = useState([
