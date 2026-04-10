@@ -112,8 +112,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [X] **Backend listens for WebSocket connection** - Service/index.js was updated to create a WebSocket server that has the backend listen with the /ws path and allows my startup to have a fully-fledged multiplayer experience. The backend properly listens for this server to allow this.
+- [X] **Frontend makes WebSocket connection** - I made a small helper .js file called gameSocket that is used by game.jsx. When a user plays the game, gameSocket.jsx works with game.jsx to make the frontend and backend interact with each other, allowing for the frontend to properly display all the correct information to play the game.
+- [X] **Data sent over WebSocket connection** - The frontend sends WebSocket messages, such as the join, submit, and restart buttons which the backend properly picks up and updates the game state properly to all connected users.
+- [X] **WebSocket data displayed** - The website properly displays all relevant WebSocket information, such as players connected, turn order, current player, countdown timer, etc.
+- [X] **Application is fully functional** - Everything that was previously mocked is now replaced with fully fledged and operational mechanics, and the website is now as I originally envisioned. One area of improvement I thought of while developing this application is to enable multiple lobbies, but as it currently stands, this is perfectly serviceable.
